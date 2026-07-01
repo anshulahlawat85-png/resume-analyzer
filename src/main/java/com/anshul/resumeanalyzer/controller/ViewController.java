@@ -22,6 +22,10 @@ import org.springframework.http.ResponseEntity;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
+import com.anshul.resumeanalyzer.model.User;
+import com.anshul.resumeanalyzer.repository.UserRepository;
+import java.security.Principal;
+import com.anshul.resumeanalyzer.repository.UserRepository;
 
 @Controller
 public class ViewController {
@@ -30,6 +34,7 @@ public class ViewController {
     private final ATSService atsService;
     private final AnalysisHistoryRepository historyRepository;
     private final PDFReportService pdfReportService;
+    private final UserRepository userRepository;
 
     private ATSResult latestResult;
 
@@ -37,12 +42,14 @@ public class ViewController {
             ResumeRepository resumeRepository,
             ATSService atsService,
             AnalysisHistoryRepository historyRepository,
-            PDFReportService pdfReportService) {
+            PDFReportService pdfReportService,
+            UserRepository userRepository) {
 
         this.resumeRepository = resumeRepository;
         this.atsService = atsService;
         this.historyRepository = historyRepository;
         this.pdfReportService = pdfReportService;
+        this.userRepository = userRepository;
     }
 
     // Show all resumes
@@ -142,11 +149,25 @@ public class ViewController {
     }
 
     @PostMapping("/upload-resume")
+
     public String uploadResume(
             @RequestParam("file") MultipartFile file,
             @RequestParam("jobDescription") String jobDescription,
-            Model model)
+            Model model,
+            jakarta.servlet.http.HttpSession session,
+            Principal principal)
             throws IOException {
+        Integer count = (Integer) session.getAttribute("guestCount");
+
+        if (count == null) {
+            count = 0;
+        }
+
+        if (count >= 3) {
+            return "free-limit";
+        }
+
+        session.setAttribute("guestCount", count + 1);
 
         PDDocument document = Loader.loadPDF(file.getBytes());
 
@@ -162,6 +183,14 @@ public class ViewController {
                         jobDescription);
         latestResult = result;
         AnalysisHistory history = new AnalysisHistory();
+        if (principal != null) {
+
+            User user = userRepository
+                    .findByEmail(principal.getName())
+                    .orElse(null);
+
+            history.setUser(user);
+        }
 
         history.setFileName(
                 file.getOriginalFilename());
@@ -179,9 +208,15 @@ public class ViewController {
         return "analysis-result";
     }
     @GetMapping("/history")
-    public String showHistory(Model model) {
+    public String showHistory(
+            Model model,
+            Principal principal) {
 
-        var historyList = historyRepository.findAll();
+        User user = userRepository
+                .findByEmail(principal.getName())
+                .orElse(null);
+
+        var historyList = historyRepository.findByUser(user);
 
         model.addAttribute("historyList", historyList);
 
@@ -242,12 +277,19 @@ public class ViewController {
     @GetMapping("/search-history")
     public String searchHistory(
             @RequestParam String keyword,
-            Model model) {
+            Model model,
+            Principal principal) {
+
+        User user = userRepository
+                .findByEmail(principal.getName())
+                .orElse(null);
 
         var historyList =
                 historyRepository
-                        .findByFileNameContainingIgnoreCase(keyword);
-
+                        .findByUserAndFileNameContainingIgnoreCase(
+                                user,
+                                keyword
+                        );
         model.addAttribute(
                 "historyList",
                 historyList);
@@ -329,5 +371,15 @@ public class ViewController {
                 .contentType(
                         MediaType.APPLICATION_PDF)
                 .body(pdf);
+    }
+    @GetMapping("/users")
+    public String showUsers(Model model) {
+
+        model.addAttribute(
+                "users",
+                userRepository.findAll()
+        );
+
+        return "users";
     }
 }

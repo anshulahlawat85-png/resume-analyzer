@@ -1,6 +1,7 @@
 package com.anshul.resumeanalyzer.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 public class AnalysisHistory {
@@ -14,14 +15,18 @@ public class AnalysisHistory {
     private int atsScore;
 
     @Column(nullable = false)
-    private java.time.LocalDateTime analyzedAt;
+    private LocalDateTime analyzedAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public AnalysisHistory() {
     }
 
     @PrePersist
     public void prePersist() {
-        analyzedAt = java.time.LocalDateTime.now();
+        analyzedAt = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -44,11 +49,19 @@ public class AnalysisHistory {
         this.atsScore = atsScore;
     }
 
-    public java.time.LocalDateTime getAnalyzedAt() {
+    public LocalDateTime getAnalyzedAt() {
         return analyzedAt;
     }
 
-    public void setAnalyzedAt(java.time.LocalDateTime analyzedAt) {
+    public void setAnalyzedAt(LocalDateTime analyzedAt) {
         this.analyzedAt = analyzedAt;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

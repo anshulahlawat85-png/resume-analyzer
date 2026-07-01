@@ -85,19 +85,116 @@
     <!-- Hero Section -->
     <div class="hero">
 
-        <h1 class="display-4 fw-bold">
-            AI Resume Analyzer
+        <h1 class="display-3 fw-bold">
+            🚀 Land Your Dream Job with AI Resume Analyzer
         </h1>
 
         <p class="lead mt-3">
-            Analyze resumes, calculate ATS score,
-            download PDF reports and track ATS history.
+            Analyze your resume against any Job Description,
+            improve your ATS score,
+            identify missing skills,
+            and download a professional ATS report instantly.
         </p>
 
-        <a href="/upload"
-           class="btn btn-light btn-lg mt-3">
-            🚀 Analyze Resume
-        </a>
+        <div class="mt-4">
+
+            <a href="/upload"
+               class="btn btn-light btn-lg me-3">
+                🚀 Analyze Resume
+            </a>
+
+            <a href="/history"
+               class="btn btn-outline-light btn-lg">
+                📊 Dashboard
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Features Section -->
+
+    <div class="row text-center mb-5">
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card dashboard-card h-100">
+
+                <div class="card-body">
+
+                    <h1>⚡</h1>
+
+                    <h5>Instant ATS Score</h5>
+
+                    <p class="text-muted">
+                        Analyze your resume and get your ATS score instantly.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card dashboard-card h-100">
+
+                <div class="card-body">
+
+                    <h1>🎯</h1>
+
+                    <h5>Smart Skill Matching</h5>
+
+                    <p class="text-muted">
+                        Compare your resume with any Job Description.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card dashboard-card h-100">
+
+                <div class="card-body">
+
+                    <h1>📄</h1>
+
+                    <h5>PDF Report</h5>
+
+                    <p class="text-muted">
+                        Download a professional ATS report with one click.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card dashboard-card h-100">
+
+                <div class="card-body">
+
+                    <h1>📊</h1>
+
+                    <h5>Analytics Dashboard</h5>
+
+                    <p class="text-muted">
+                        Track your previous analyses and ATS history.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
@@ -145,6 +242,61 @@
                     <h5>Highest ATS</h5>
 
                     <h2 th:text="${highestScore} + '%'"></h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Why Choose Resume Analyzer -->
+
+    <div class="card dashboard-card mb-5">
+
+        <div class="card-body p-5">
+
+            <div class="row align-items-center">
+
+                <div class="col-md-7">
+
+                    <h2 class="fw-bold mb-3">
+                        Why Choose Resume Analyzer?
+                    </h2>
+
+                    <p class="lead text-muted">
+
+                        More than 70% of resumes are rejected by Applicant Tracking Systems (ATS)
+                        before reaching a recruiter.
+
+                        Resume Analyzer helps you optimize your resume by comparing it with a Job
+                        Description, identifying missing skills, evaluating resume quality,
+                        and generating a professional ATS report.
+
+                    </p>
+
+                    <ul class="mt-4">
+
+                        <li>✔ Instant ATS Score</li>
+
+                        <li>✔ Resume Quality Analysis</li>
+
+                        <li>✔ Smart Skill Matching</li>
+
+                        <li>✔ Download Professional PDF Report</li>
+
+                        <li>✔ Analysis History Dashboard</li>
+
+                    </ul>
+
+                </div>
+
+                <div class="col-md-5 text-center">
+
+                    <h1 style="font-size:120px;">
+                        🚀
+                    </h1>
 
                 </div>
 
@@ -268,23 +420,187 @@
 
 </div>
 
-<footer class="text-center mt-5 mb-3">
+<div class="row text-center mt-5 mb-5">
 
-    <hr>
+    <div class="col-md-3 mb-3">
 
-    <h6>
-        Made by Anshul Ahlawat 🚀
-    </h6>
+        <div class="card dashboard-card">
 
-    <p>
-        AI Resume Analyzer Project
-    </p>
+            <div class="card-body">
 
-    <p>
-        📧 anshulahlawat85@gmail.com
-    </p>
+                <h2 class="text-primary">⚡</h2>
+
+                <h3>Fast</h3>
+
+                <p class="text-muted">
+                    ATS analysis completed within seconds.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<footer
+        class="bg-dark text-white mt-5 pt-5 pb-4">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-4">
+
+                <h4>
+                    🚀 Resume Analyzer
+                </h4>
+
+                <p class="text-light">
+
+                    Analyze your resume,
+                    improve ATS score,
+                    identify missing skills,
+                    and download professional reports.
+
+                </p>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <h5>
+                    Quick Links
+                </h5>
+
+                <ul class="list-unstyled">
+
+                    <li>
+                        <a href="/"
+                           class="text-light text-decoration-none">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/upload"
+                           class="text-light text-decoration-none">
+                            Upload Resume
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/history"
+                           class="text-light text-decoration-none">
+                            Dashboard
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <h5>
+                    Contact
+                </h5>
+
+                <p>
+
+                    📧 anshulahlawat85@gmail.com
+
+                </p>
+
+                <p>
+
+                    👨‍💻 Developed by
+                    <b>Anshul Ahlawat</b>
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <hr class="bg-light">
+
+        <div class="text-center">
+
+            © 2026 Resume Analyzer |
+            All Rights Reserved.
+
+        </div>
+
+    </div>
 
 </footer>
+    <!-- Trust Statistics -->
+
+
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card dashboard-card">
+
+                <div class="card-body">
+
+                    <h2 class="text-success">🔒</h2>
+
+                    <h3>Secure</h3>
+
+                    <p class="text-muted">
+                        Your uploaded resumes remain private.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card dashboard-card">
+
+                <div class="card-body">
+
+                    <h2 class="text-warning">📄</h2>
+
+                    <h3>Professional</h3>
+
+                    <p class="text-muted">
+                        Generate detailed ATS reports instantly.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card dashboard-card">
+
+                <div class="card-body">
+
+                    <h2 class="text-danger">🎓</h2>
+
+                    <h3>Student Friendly</h3>
+
+                    <p class="text-muted">
+                        Built to help students improve their resumes.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
 
 </body>
 </html>
