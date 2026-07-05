@@ -59,6 +59,11 @@ public class ViewController {
         return "resumes";
     }
 
+    @GetMapping("/")
+    public String home() {
+        return "home";
+    }
+
     // Show Add Resume Form
     @GetMapping("/add-resume")
     public String showAddResumeForm() {
