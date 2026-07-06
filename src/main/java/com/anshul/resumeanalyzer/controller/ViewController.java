@@ -25,7 +25,7 @@ import java.io.IOException;
 import com.anshul.resumeanalyzer.model.User;
 import com.anshul.resumeanalyzer.repository.UserRepository;
 import java.security.Principal;
-import com.anshul.resumeanalyzer.repository.UserRepository;
+
 
 @Controller
 public class ViewController {
@@ -385,3 +385,4 @@ public class ViewController {
         return "users";
     }
 }
+// Fresh deploy
