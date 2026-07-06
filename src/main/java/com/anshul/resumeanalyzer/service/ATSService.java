@@ -150,11 +150,22 @@ public class ATSService {
             resumeQuality.append("❌ Phone Number Missing\n");
 
         }
-        if (resume.contains("@") &&
-                resume.matches("(?s).*\\d{10}.*")) {
+        contactScore = 0;
 
-            contactScore = 5;
+        if (resume.contains("@")) {
+            contactScore += 2;
+        }
 
+        if (resume.matches("(?s).*\\d{10}.*")) {
+            contactScore += 1;
+        }
+
+        if (resume.contains("linkedin")) {
+            contactScore += 1;
+        }
+
+        if (resume.contains("github")) {
+            contactScore += 1;
         }
 
         if (resume.contains("education")) {
@@ -270,11 +281,17 @@ public class ATSService {
 
         int totalSkills = requiredSkills.size();
 
-        int score = 0;
+        technicalScore =
+                (matched * 40) / Math.max(totalSkills,1);
 
-        if (totalSkills > 0) {
-            score = (matched * 100) / totalSkills;
-        }
+        int score =
+                technicalScore
+                        + projectScore
+                        + educationScore
+                        + experienceScore
+                        + formattingScore
+                        + contactScore;
+
         technicalScore = (matched * 40) / Math.max(totalSkills, 1);
 
         if (matchedSkills.length() == 0) {

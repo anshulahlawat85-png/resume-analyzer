@@ -159,17 +159,21 @@ public class ViewController {
             jakarta.servlet.http.HttpSession session,
             Principal principal)
             throws IOException {
-        Integer count = (Integer) session.getAttribute("guestCount");
+        // Apply limit only for guest users
+        if (principal == null) {
 
-        if (count == null) {
-            count = 0;
+            Integer count = (Integer) session.getAttribute("guestCount");
+
+            if (count == null) {
+                count = 0;
+            }
+
+            if (count >= 3) {
+                return "free-limit";
+            }
+
+            session.setAttribute("guestCount", count + 1);
         }
-
-        if (count >= 3) {
-            return "free-limit";
-        }
-
-        session.setAttribute("guestCount", count + 1);
 
         PDDocument document = Loader.loadPDF(file.getBytes());
 
